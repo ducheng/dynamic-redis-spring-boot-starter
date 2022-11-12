@@ -19,13 +19,7 @@ import java.util.Map;
 @Configuration(proxyBeanMethods = false)
 public class RedisCustomizedConfiguration {
 
-    /**
-     * @param builderCustomizers
-     * @param clientResources
-     * @param multiRedisProperties
-     * @return
-     * @see org.springframework.boot.autoconfigure.data.redis.LettuceConnectionConfiguration
-     */
+
     @Bean
     public MultiRedisConnectionFactory multiRedisConnectionFactory(
             ObjectProvider<LettuceClientConfigurationBuilderCustomizer> builderCustomizers,

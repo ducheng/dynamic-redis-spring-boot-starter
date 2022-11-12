@@ -37,11 +37,7 @@ public class MultiRedisConnectionFactory
         MultiRedisConnectionFactory.currentRedisName.set(currentRedisName);
     }
 
-    /**
-     * 选择连接和数据库
-     * @param currentRedisName
-     * @param db
-     */
+
     public void setCurrentRedis(String currentRedisName,Integer db) {
         if (!connectionFactoryMap.containsKey(currentRedisName)) {
             throw new RuntimeException("invalid currentRedis: " + currentRedisName + ", it does not exists in configuration");
