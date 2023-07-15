@@ -40,7 +40,9 @@
 
 	<groupId>com.github.ducheng</groupId>
 	<artifactId>dynamic-redis-spring-boot-starter</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
+	<packaging>jar</packaging>
+
 	<name>dynamic-redis-spring-boot-starter</name>
 	<description>Demo project for Spring Boot</description>
 	<url>https://github.com/ducheng/dynamic-redis-spring-boot-starter</url>
@@ -56,16 +58,16 @@
 	</dependencies>
 
 	<distributionManagement>
-		<repository>
-			<id>ossrh</id> <!-- 这里的id要与maven setting.xml中server的id一致 -->
-			<name>oss nexus repository hosting</name>
-			<url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
-		</repository>
 		<snapshotRepository>
-			<id>ossrh</id> <!-- 这里的id要与maven setting.xml中server的id一致 -->
-			<name>oss nexus repository hosting</name>
-			<url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+			<id>sonatype-nexus-snapshots</id>
+			<name>Sonatype Nexus Snapshots</name>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 		</snapshotRepository>
+		<repository>
+			<id>sonatype-nexus-staging</id>
+			<name>Nexus Release Repository</name>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
 	</distributionManagement>
 
 
@@ -120,7 +122,7 @@
 				<version>1.6.7</version>
 				<extensions>true</extensions>
 				<configuration>
-					<serverId>ossrh</serverId>
+					<serverId>sonatype-nexus-staging</serverId>
 					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
 					<autoReleaseAfterClose>true</autoReleaseAfterClose>
 				</configuration>
