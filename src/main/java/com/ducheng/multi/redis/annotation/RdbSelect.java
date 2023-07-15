@@ -17,10 +17,4 @@ public @interface RdbSelect {
      * @return
      */
     String dataSource() default MultiRedisProperties.DEFAULT;
-
-    /**
-     * 默认数据库
-     * @return
-     */
-    int db() default 0 ;
 }

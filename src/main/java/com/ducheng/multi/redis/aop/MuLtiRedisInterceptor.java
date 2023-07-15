@@ -23,7 +23,7 @@ public class MuLtiRedisInterceptor implements MethodInterceptor {
         }
         RdbSelect  rdbSelect = invocation.getMethod().getAnnotation(RdbSelect.class);
         if (!ObjectUtils.isEmpty(rdbSelect)) {
-            multiRedisConnectionFactory.setCurrentRedis(rdbSelect.dataSource(),rdbSelect.db());
+            multiRedisConnectionFactory.setCurrentRedis(rdbSelect.dataSource());
         }
         //核心方法不变
         return invocation.proceed();

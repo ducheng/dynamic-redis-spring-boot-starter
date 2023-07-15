@@ -20,11 +20,6 @@ public class MultiRedisConnectionFactory
      */
     private static final ThreadLocal<String> currentRedisName = new ThreadLocal<>();
 
-    /**
-     *  当前redis的db数据库
-     */
-    private static final ThreadLocal<Integer> currentRedisDb = new ThreadLocal<>();
-
 
     public MultiRedisConnectionFactory(Map<String, LettuceConnectionFactory> connectionFactoryMap) {
         this.connectionFactoryMap = connectionFactoryMap;
@@ -36,16 +31,6 @@ public class MultiRedisConnectionFactory
         }
         MultiRedisConnectionFactory.currentRedisName.set(currentRedisName);
     }
-
-
-    public void setCurrentRedis(String currentRedisName,Integer db) {
-        if (!connectionFactoryMap.containsKey(currentRedisName)) {
-            throw new RuntimeException("invalid currentRedis: " + currentRedisName + ", it does not exists in configuration");
-        }
-        MultiRedisConnectionFactory.currentRedisName.set(currentRedisName);
-        MultiRedisConnectionFactory.currentRedisDb.set(db);
-    }
-
 
     @Override
     public void destroy() throws Exception {
@@ -78,14 +63,6 @@ public class MultiRedisConnectionFactory
 
     @Override
     public RedisConnection getConnection() {
-        Integer currentRedisDb = MultiRedisConnectionFactory.currentRedisDb.get();
-        if (!ObjectUtils.isEmpty(currentRedisDb)) {
-            LettuceConnectionFactory lettuceConnectionFactory = currentLettuceConnectionFactory();
-            lettuceConnectionFactory.setShareNativeConnection(false);
-            RedisConnection connection = lettuceConnectionFactory.getConnection();
-            connection.select(currentRedisDb);
-            return connection;
-        }
         return   currentLettuceConnectionFactory().getConnection();
     }
 
