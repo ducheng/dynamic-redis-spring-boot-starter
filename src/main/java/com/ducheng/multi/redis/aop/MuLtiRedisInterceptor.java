@@ -25,7 +25,14 @@ public class MuLtiRedisInterceptor implements MethodInterceptor {
         if (!ObjectUtils.isEmpty(rdbSelect)) {
             multiRedisConnectionFactory.setCurrentRedis(rdbSelect.dataSource());
         }
+        Object proceed;
+        try {
+             proceed = invocation.proceed();
+        }finally {
+            //一定要释放
+            MultiRedisConnectionFactory.currentRedisName.remove();
+        }
         //核心方法不变
-        return invocation.proceed();
+        return proceed;
     }
 }

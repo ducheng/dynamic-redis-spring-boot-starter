@@ -18,7 +18,7 @@ public class MultiRedisConnectionFactory
      * 当前redis的名字
      *
      */
-    private static final ThreadLocal<String> currentRedisName = new ThreadLocal<>();
+    public static final ThreadLocal<String> currentRedisName = new ThreadLocal<>();
 
 
     public MultiRedisConnectionFactory(Map<String, LettuceConnectionFactory> connectionFactoryMap) {
@@ -45,7 +45,6 @@ public class MultiRedisConnectionFactory
     private LettuceConnectionFactory currentLettuceConnectionFactory() {
         String currentRedisName = MultiRedisConnectionFactory.currentRedisName.get();
         if (!ObjectUtils.isEmpty(currentRedisName)) {
-            MultiRedisConnectionFactory.currentRedisName.remove();
             return connectionFactoryMap.get(currentRedisName);
         }
         return connectionFactoryMap.get(MultiRedisProperties.DEFAULT);
